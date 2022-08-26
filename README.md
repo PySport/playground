@@ -2,6 +2,8 @@
 
 You can find the playground at https://playground.pysport.org
 
+Source is hosted at https://github.com/PySport/playground
+
 
 ## Create a new notebook
 
