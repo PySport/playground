@@ -28,6 +28,7 @@ MPLSOCCER_PREPEND_CELLS = [
             "import micropip\n",
             "await micropip.install('pyodide-http')\n",
             "await micropip.install('mplsoccer')\n",
+            "await micropip.install('pandas')\n",
             "await micropip.install('requests')\n",
             "\n",
             "import pyodide_http\n",
@@ -47,6 +48,11 @@ notebooks = [
         url="https://mplsoccer.readthedocs.io/en/latest/_downloads/5fa8e8f5d40b355b46cf461a103e017b/plot_radar.ipynb",
         prepend_cells=MPLSOCCER_PREPEND_CELLS,
         destination_filename="content/mplsoccer_/plot_radar.ipynb"
+    ),
+    NotebookImport(
+        url="https://mplsoccer.readthedocs.io/en/latest/_downloads/7ac4a0df587f1bd47b8fc0e32a075cab/plot_turbine.ipynb",
+        prepend_cells=MPLSOCCER_PREPEND_CELLS,
+        destination_filename="content/mplsoccer_/plot_turbine.ipynb"
     )
 ]
 
@@ -102,4 +108,5 @@ def import_notebook(import_job: NotebookImport):
 
 
 if __name__ == "__main__":
-    import_notebook(notebooks[0])
+    for notebook in notebooks:
+        import_notebook(notebook)
