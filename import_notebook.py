@@ -65,12 +65,24 @@ def fix_github_urls(code):
 
 def replace_url(cells, url):
     def fix(cell):
-        return dict(
-            cell_type=cell['cell_type'],
-            source=[
-                source.replace('%URL%', url) for source in cell['source']
-            ]
-        )
+        if cell['cell_type'] == "code":
+            return dict(
+                cell_type='code',
+                execution_count=None,
+                metadata=cell.get('metadata', {}),
+                outputs=[],
+                source=[
+                    fix_github_urls(source.replace('%URL%', url)) for source in cell['source']
+                ],
+            )
+        else:
+            return dict(
+                cell_type=cell['cell_type'],
+                metadata=cell.get('metadata', {}),
+                source=[
+                    fix_github_urls(source.replace('%URL%', url)) for source in cell['source']
+                ],
+            )
 
     return [
         fix(cell) for cell in cells
@@ -81,16 +93,12 @@ def import_notebook(import_job: NotebookImport):
     data = requests.get(import_job.url)
     notebook = data.json()
     notebook['cells'] = replace_url(
-        import_job.prepend_cells, import_job.url
-    ) + notebook['cells']
-    for cell in notebook['cells']:
-        # print(cell)
-        if cell['cell_type'] == 'code':
-            for i in range(len(cell['source'])):
-                cell['source'][i] = fix_github_urls(cell['source'][i])
+        import_job.prepend_cells + notebook['cells'],
+        import_job.url
+    )
 
     with open(import_job.destination_filename, 'w') as fp:
-        json.dump(notebook, fp)
+        json.dump(notebook, fp, indent=2)
 
 
 if __name__ == "__main__":
