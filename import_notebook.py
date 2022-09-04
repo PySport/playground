@@ -46,7 +46,7 @@ notebooks = [
     NotebookImport(
         url="https://mplsoccer.readthedocs.io/en/latest/_downloads/5fa8e8f5d40b355b46cf461a103e017b/plot_radar.ipynb",
         prepend_cells=MPLSOCCER_PREPEND_CELLS,
-        destination_filename="content/mplsoccer_/plot_radar_v2.ipynb"
+        destination_filename="content/mplsoccer_/plot_radar.ipynb"
     )
 ]
 
