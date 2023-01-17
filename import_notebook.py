@@ -267,7 +267,8 @@ def replace_url(cells, url):
 
 
 def import_notebook(import_job: NotebookImport):
-    if not os.path.exists(import_job.destination_filename):
+    filename = import_job.destination_filename.replace(" ", "_")
+    if not os.path.exists(filename):
         data = requests.get(import_job.url)
         notebook = data.json()
         notebook['cells'] = replace_url(
@@ -275,10 +276,10 @@ def import_notebook(import_job: NotebookImport):
             import_job.url
         )
 
-        dir_name = os.path.dirname(import_job.destination_filename)
+        dir_name = os.path.dirname(filename)
         os.makedirs(dir_name, exist_ok=True)
 
-        with open(import_job.destination_filename, 'w') as fp:
+        with open(filename, 'w') as fp:
             json.dump(notebook, fp, indent=2)
 
 
