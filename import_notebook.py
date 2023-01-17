@@ -32,7 +32,7 @@ MPLSOCCER_PREPEND_CELLS = [
     {
         "cell_type": "code",
         "source": [
-            "# Patch requests to make it work in the browser",
+            "# Patch requests to make it work in the browser\n",
             "import pyodide_http\n",
             "pyodide_http.patch_all()",
         ]
