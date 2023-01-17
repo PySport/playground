@@ -26,15 +26,16 @@ MPLSOCCER_PREPEND_CELLS = [
     {
         "cell_type": "code",
         "source": [
-            "%pip install mplsoccer highlight_text pandas requests"
+            "%pip install requests\n",
+            "# Patch requests to make it work in the browser\n",
+            "import pyodide_http\n",
+            "pyodide_http.patch_all()",
         ]
     },
     {
         "cell_type": "code",
         "source": [
-            "# Patch requests to make it work in the browser\n",
-            "import pyodide_http\n",
-            "pyodide_http.patch_all()",
+            "%pip install mplsoccer highlight_text pandas"
         ]
     },
     {
