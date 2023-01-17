@@ -26,15 +26,14 @@ MPLSOCCER_PREPEND_CELLS = [
     {
         "cell_type": "code",
         "source": [
+            "import pyodide_http\n",
+            "pyodide_http.patch_all()",
+            "\n",
             "import micropip\n",
-            "await micropip.install('pyodide-http')\n",
             "await micropip.install('mplsoccer')\n",
             "await micropip.install('highlight_text')\n",
             "await micropip.install('pandas')\n",
             "await micropip.install('requests')\n",
-            "\n",
-            "import pyodide_http\n",
-            "pyodide_http.patch_all()"
         ]
     },
     {
