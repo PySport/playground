@@ -234,6 +234,13 @@ def fix_github_urls(code):
     FROM: https://github.com/googlefonts/SourceSerifProGFVersion/blob/main/fonts/SourceSerifPro-Regular.ttf?raw=true
     TO: https://raw.githubusercontent.com/googlefonts/SourceSerifProGFVersion/main/fonts/SourceSerifPro-Regular.ttf
     """
+
+    # Fix broken font
+    code = code.replace(
+        "FontManager()",
+        "FontManager('https://raw.githubusercontent.com/googlefonts/roboto/main/src/hinted/Roboto-Regular.ttf')"
+    )
+
     return re.sub(
         r"https://github\.com/([^/]+/[^/]+)/blob/([a-zA-Z0-9.&/?:@\-_=#]+)",
         r"https://raw.githubusercontent.com/\1/\2",
