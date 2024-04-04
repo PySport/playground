@@ -35,7 +35,7 @@ MPLSOCCER_PREPEND_CELLS = [
     {
         "cell_type": "code",
         "source": [
-            "%pip install mplsoccer highlight_text pandas"
+            "%pip install mplsoccer==1.1.12 highlight_text pandas"
         ]
     },
     {
